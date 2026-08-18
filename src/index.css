@@ -58,3 +58,8 @@ header > p {
     margin-top: 1em;
 }
 
+.bg-blob-main {
+  height: 180px;
+  width: 180px;
+}
+

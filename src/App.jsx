@@ -1,18 +1,18 @@
 import Header from "./components/Header.jsx"
-import { useState } from "react"
+import Main from "./components/Main.jsx"
+import { useEffect, useState } from "react"
 
 
 function App() {
-let [gameStart, setGameStart] = useState(false)
+const [gameStart, setGameStart] = useState(false)
 
-function startGame() {
+ function startGame() {
   setGameStart(true)
-
 }
 
   return (
     <> 
-      { gameStart ? <h1>Game has started</h1> : <Header gameStarted={startGame}/>}
+      { gameStart ? <Main /> : <Header gameStarted={startGame}/>}
     </>
   )
 }
