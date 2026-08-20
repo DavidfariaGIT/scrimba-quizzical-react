@@ -22,7 +22,7 @@ export default function main(props) {
 
         const answerButtons = answersArray.map((curr, i) => (
           <div key={curr}>
-            <input id={curr} type="radio" name="answers" value={curr} />
+            <input id={curr} type="radio" name={curr} value={curr} />
             <label className="answer-btn" htmlFor={curr}>
               {curr}
             </label>
@@ -30,12 +30,13 @@ export default function main(props) {
         ));
 
         return (
-            <div className="question-wrapper" >
+            <div className="question-wrapper">
             <h2>{question.question}</h2>
             <div className="answers-list">{answerButtons}</div>
             </div>
         );
       })}
+    <button className="submit-button" type="submit">Check answers</button>
       </form>
       <div className="background-blob-one bg-blob-main">
         <img src="src/assets/yellow-blob.png" />
