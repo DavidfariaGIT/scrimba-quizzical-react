@@ -129,10 +129,28 @@ input[type="radio"]:checked + label {
     border: 2px solid #4d5b9e;
 }
 
+input[type="radio"]:focus-visible + label {
+  outline: 3px solid #66b2ff;
+  outline-offset: 2px;
+}
+
 
 h2 {
   font-weight: 500;
   font-size: 1.5em;
   margin: 0;
   padding: 0;
+}
+
+.submit-button {
+    background-color: #293264;
+    color: #F5F7FB;
+    border: none;
+    padding: 1em 2em;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    font-weight: 800;
+    font-size: 1em;
+    margin-top: 1.2em;
 }
