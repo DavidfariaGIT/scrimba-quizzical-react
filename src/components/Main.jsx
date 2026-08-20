@@ -1,42 +1,48 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export default function main(props) {
-    const [quizData, setQuizData] = useState([])
+  const [quizData, setQuizData] = useState([]);
 
-    useEffect(() => {
-        fetch('https://opentdb.com/api.php?amount=5')
-        .then(res => res.json())
-        .then(data => setQuizData(data.results))
-    }, [])
+  useEffect(() => {
+    fetch("https://opentdb.com/api.php?amount=5")
+      .then((res) => res.json())
+      .then((data) => setQuizData(data.results));
+  }, []);
 
-    console.log(quizData)
+  console.log(quizData);
 
-    const questionAnswers = quizData.map((answer) => {
-        const answersArray = []
-        answersArray.push(...answer.incorrect_answers)
-        answersArray.push(answer.correct_answer)
+  return (
+    <main className="main-container">
+    <form>
+      {quizData.map((question, index) => {
+        console.log(question);
+        const answersArray = [];
+        answersArray.push(...question.incorrect_answers);
+        answersArray.push(question.correct_answer);
 
-        console.log(answersArray)
+        const answerButtons = answersArray.map((curr, i) => (
+          <div key={curr}>
+            <input id={curr} type="radio" name="answers" value={curr} />
+            <label className="answer-btn" htmlFor={curr}>
+              {curr}
+            </label>
+          </div>
+        ));
 
         return (
-            <input key={answer.question} type="radio" value={answersArray}/>
-        )
-    })
-    
-
-    return(
-        <main>   
-            {quizData.map((question, index) => {
-                return (
-                <div key={question.question}>
-                <p>{question.question}</p>
-                {questionAnswers}
-                </div>
-                )
-            })}
-            <div className="background-blob-one bg-blob-main"><img src="src/assets/yellow-blob.png"/></div> 
-            <div className="background-blob-two bg-blob-main"><img src="src/assets/blue-blob.png"/></div>
-        </main>
-     
-     )
+            <div className="question-wrapper" >
+            <h2>{question.question}</h2>
+            <div className="answers-list">{answerButtons}</div>
+            </div>
+        );
+      })}
+      </form>
+      <div className="background-blob-one bg-blob-main">
+        <img src="src/assets/yellow-blob.png" />
+      </div>
+      <div className="background-blob-two bg-blob-main">
+        <img src="src/assets/blue-blob.png" />
+      </div>
+    </main>
+  );
 }
