@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import {decode} from 'html-entities';
+
 
 export default function main(props) {
   const [quizData, setQuizData] = useState([]);
@@ -15,6 +17,7 @@ export default function main(props) {
     <main className="main-container">
     <form>
       {quizData.map((question, index) => {
+        
         console.log(question);
         const answersArray = [];
         answersArray.push(...question.incorrect_answers);
@@ -24,14 +27,14 @@ export default function main(props) {
           <div key={curr}>
             <input id={curr} type="radio" name={curr} value={curr} />
             <label className="answer-btn" htmlFor={curr}>
-              {curr}
+              {decode(curr)}
             </label>
           </div>
         ));
 
         return (
-            <div className="question-wrapper">
-            <h2>{question.question}</h2>
+            <div key={index} className="question-wrapper">
+            <h2>{decode(question.question)}</h2>
             <div className="answers-list">{answerButtons}</div>
             </div>
         );
