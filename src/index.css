@@ -80,7 +80,7 @@ form {
   flex-direction: column;
   align-items: start;
   gap: 1em;
-  max-width: 65%;
+  max-width: 80%;
 }
 
 .question-wrapper {
