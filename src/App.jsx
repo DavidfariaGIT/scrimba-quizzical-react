@@ -1,5 +1,5 @@
 import Header from "./components/Header.jsx"
-import Main from "./components/Main.jsx"
+import Quiz from "./components/Quiz.jsx"
 import { useEffect, useState } from "react"
 
 
@@ -12,7 +12,7 @@ const [gameStart, setGameStart] = useState(false)
 
   return (
     <> 
-      { gameStart ? <Main /> : <Header gameStarted={startGame}/>}
+      { gameStart ? <Quiz /> : <Header gameStarted={startGame}/>}
     </>
   )
 }

@@ -67,73 +67,35 @@ header > p {
   width: 180px;
 }
 
-.main-container {
+main {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding-inline: 5em;
 }
 
-form {
+.question-container {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  gap: 1em;
-  max-width: 80%;
+  justify-content: center;
+  width: 75%;
+  margin-left: 7em;
 }
 
-.question-wrapper {
-    width: 100%;
-    border-bottom: 1px solid #4d5b9e;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding-bottom: 1.5em;
-    gap: 1em;
-}
-
-.answers-list {
+.question-block {
+  border-bottom: 1px solid #dbdef0;
+  height: 120px;
+  margin-bottom: 1em;
   display: flex;
-  flex-direction: row;
-  justify-content: left;
-  gap: 0.79em;
-  margin-block: 0.5em;
-  margin-left: -0.4em;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
+.answer-wrapper {
+  display: flex;
+  gap: 1.5em;
 }
-
-input[type="radio"] + label {
-  border: 2px solid #4d5b9e;
-  border-radius: 10px;
-  color: #293264;
-  height: 20px;
-  padding: 4px 25px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-input[type="radio"] + label:hover {
-    background-color: #D6DBF5;
-    border: none;
-}
-
-input[type="radio"]:checked + label {
-    background-color: #D6DBF5;;
-    border: 2px solid #4d5b9e;
-}
-
-input[type="radio"]:focus-visible + label {
-  outline: 3px solid #66b2ff;
-  outline-offset: 2px;
-}
-
 
 h2 {
   font-weight: 500;
@@ -142,15 +104,40 @@ h2 {
   padding: 0;
 }
 
-.submit-button {
-    background-color: #293264;
-    color: #F5F7FB;
-    border: none;
-    padding: 1em 2em;
-    border-radius: 10px;
-    display: block;
-    margin: auto;
-    font-weight: 800;
-    font-size: 1em;
-    margin-top: 1.2em;
+.answer-list {
+  display: flex;
+  gap: 3em;
+  margin-bottom: 1em;
+}
+
+.answer-btn {
+  font-size: 1em;
+  color: #293264;
+  background-color: #f5f7fb;
+  border: 2px solid #4d5b9e;
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-weight: 500;
+}
+
+.hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.custom-button {
+  display: inline-block;          
+  padding: 0.5em 1em;           
+  background-color: #F5F7FB;     
+  color: #293264;                 
+  font-weight: 600;         
+  cursor: pointer;   
+  border: 2px solid #4D5B9E;
+  border-radius: 15px;                        
 }
