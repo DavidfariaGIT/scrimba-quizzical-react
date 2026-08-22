@@ -65,6 +65,7 @@ header > p {
 .bg-blob-main {
   height: 180px;
   width: 180px;
+  z-index: -10;
 }
 
 main {
@@ -85,7 +86,6 @@ main {
 
 .question-block {
   border-bottom: 1px solid #dbdef0;
-  height: 120px;
   margin-bottom: 1em;
   display: flex;
   flex-direction: column;
@@ -95,6 +95,7 @@ main {
 .answer-wrapper {
   display: flex;
   gap: 1.5em;
+  margin-block: 1em;
 }
 
 h2 {
@@ -140,4 +141,10 @@ h2 {
   cursor: pointer;   
   border: 2px solid #4D5B9E;
   border-radius: 15px;                        
+}
+
+.selectedguess {
+  background-color: #D6DBF5;
+  color: #293264;
+  border: none;
 }

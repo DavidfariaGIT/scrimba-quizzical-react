@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { decode } from "html-entities";
 import { nanoid } from "nanoid";
+import { clsx } from "clsx";
 
 export default function Quiz() {
   const [questions, setQuestions] = useState([]);
-
-  const id = nanoid();
+  const [guessedAnswers, setGuessedAnswers] = useState([]);
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5")
@@ -16,10 +16,10 @@ export default function Quiz() {
           allAnswers.sort(() => Math.random() - 0.5);
 
           return {
-            id: id,
+            id: nanoid(),
             question: decode(item.question),
             answers: allAnswers.map((answer) => ({
-              id: id,
+              id: nanoid(),
               value: decode(answer),
               isSelected: false,
             })),
@@ -30,19 +30,38 @@ export default function Quiz() {
       });
   }, []);
 
+  console.log(questions);
+
+  const handleClick = (value, answer) => {
+    setGuessedAnswers((preValues) => [...preValues, value]);
+    answer.isSelected = true;
+    console.log(answer);
+  };
+
+  console.log(guessedAnswers);
+
   const questionsText = questions.map((ques, index) => (
     <div className="question-block" key={index}>
       <h2 key={ques.question}>{ques.question}</h2>
       <div className="answer-wrapper">
         {ques.answers.map((answer, index) => (
-          <label className="custom-button" key={index} htmlFor={answer.id}>{answer.value}
-          <input
-            className="hidden-input"
-            type="radio"
-            value={answer.value}
-            id={answer.id}
-            name={ques.id}
-          />
+          <label
+            className={clsx("custom-button", {
+              selectedguess: answer.isSelected,
+            })}
+            key={index}
+            htmlFor={`${ques.id}-${answer.id}`}
+          >
+            {answer.value}
+            <input
+              key={answer.id}
+              className="hidden-input"
+              type="radio"
+              value={answer.value}
+              id={`${ques.id}-${answer.id}`}
+              name={ques.id}
+              onClick={() => handleClick(answer.value, answer)}
+            />
           </label>
         ))}
       </div>
