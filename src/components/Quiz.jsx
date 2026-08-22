@@ -6,6 +6,8 @@ import { clsx } from "clsx";
 export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [guessedAnswers, setGuessedAnswers] = useState([]);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5")
@@ -30,15 +32,27 @@ export default function Quiz() {
       });
   }, []);
 
-  console.log(questions);
-
   const handleClick = (value, answer) => {
     setGuessedAnswers((preValues) => [...preValues, value]);
     answer.isSelected = true;
-    console.log(answer);
   };
 
-  console.log(guessedAnswers);
+  const checkAnswers = () => {
+    setShowResults(true);
+
+    const correctAnswersArray = [];
+    const correctAnswers = questions.map((correct_answer) => {
+      correctAnswersArray.push(correct_answer.correct_answer);
+    });
+
+    const wrongGuessScoreArray = guessedAnswers.filter(
+      (ans) => !correctAnswersArray.includes(ans),
+    );
+    const wrongGuesses = wrongGuessScoreArray.length;
+    setWrongAnswers(wrongGuesses);
+  };
+
+  const isGameOver = guessedAnswers.length === 5;
 
   const questionsText = questions.map((ques, index) => (
     <div className="question-block" key={index}>
@@ -47,7 +61,12 @@ export default function Quiz() {
         {ques.answers.map((answer, index) => (
           <label
             className={clsx("custom-button", {
-              selectedguess: answer.isSelected,
+              selectedguess: answer.isSelected && !showResults,
+              correctguess: showResults && answer.value === ques.correct_answer,
+              wrongguess:
+                showResults &&
+                answer.isSelected &&
+                answer.value !== ques.correct_answer,
             })}
             key={index}
             htmlFor={`${ques.id}-${answer.id}`}
@@ -73,6 +92,14 @@ export default function Quiz() {
       <section className="question-container">
         <div className="questions-wrapper">{questionsText}</div>
       </section>
+      {isGameOver ? (
+        <button onClick={checkAnswers} className="checkanswers-btn">
+          Check answers
+        </button>
+      ) : null}
+      {isGameOver && wrongAnswers !== 0 ? (
+        <p className="score-msg">{`you got ${5 - wrongAnswers}/5 Correct!`}</p>
+      ) : null}
       <div className="background-blob-one bg-blob-main">
         <img src="src/assets/yellow-blob.png" />
       </div>
